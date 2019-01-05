@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Voice command</title>
+</head>
+<body>
+
+
+<script type="text/javascript">
+	const recognition = new webkitSpeechRecognition();
+
+	recognition.continuous = true;
+	recognition.lang = 'pt-BR';
+	recognition.interimResults = true;
+	recognition.maxAlternatives = 1;
+
+	recognition.start();	
+
+	const palavras = new RegExp('azul|vermelho|verde|roxo|rosa|laranja|claro|violeta|amarelo|vinho','gi');
+
+	recognition.onresult = ({results}) => {
+		 const last = results.length - 1;
+		const lastResult = results[last][0].transcript;
+
+		const possuiPalavras = lastResult.match(palavras);
+		if(possuiPalavras){
+			if(possuiPalavras.includes("vermelho")){
+				document.body.style.background = "red";
+			}else if(possuiPalavras.includes("azul")){
+				document.body.style.background = "blue";
+			}else if(possuiPalavras.includes("verde")){
+				document.body.style.background = "green";
+			}else if(possuiPalavras.includes("roxo")){
+				document.body.style.background = "purple";
+			}else if(possuiPalavras.includes("rosa")){
+				document.body.style.background = "pink";
+			}else if(possuiPalavras.includes("laranja")){
+				document.body.style.background = "orange";
+			}else if(possuiPalavras.includes("claro")){
+				document.body.style.background = "#0DBBFF";
+			}else if(possuiPalavras.includes("violeta")){
+				document.body.style.background = "#9400D3";
+			}else if(possuiPalavras.includes("amarelo")){
+				document.body.style.background = "#F6EF74";
+			}else if(possuiPalavras.includes("vinho")){
+				document.body.style.background = "#800000";
+			}
+		}
+	}
+
+</script>
+</body>
+</html>
